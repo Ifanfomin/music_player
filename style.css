@@ -1,0 +1,348 @@
+@import url(https://fonts.googleapis.com/css2?family=Fira+Code:ital,wght@0,100;0,300;0,400;0,500;0,700;0,900;1,100;1,300;1,400;1,500;1,700;1,900&display=swap);
+
+body {
+    margin: 0;
+    padding: 0;
+    display: flex;
+    min-height: 100vh;
+    background-color: rgb(0, 0, 0);
+}
+
+.text {
+    font-family: Fira Code;
+    outline: none;
+    text-decoration: none;
+}
+
+.setted {
+    text-decoration: underline;
+}
+
+.unselectable {
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none;   /* Chrome/Safari/Opera */
+    -khtml-user-select: none;    /* Konqueror */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* Internet Explorer/Edge */
+    user-select: none;           /* Non-prefixed version, currently
+                                    not supported by any browser */
+}
+
+.show {
+    opacity: 0;
+    animation: show_ani 1s forwards;
+}
+
+.hide {
+    opacity: 0;
+    /* animation: hide_ani 1s forwards; */
+}
+
+.show-and-hide {
+    opacity: 0;
+    animation: show-ani 5s;
+    /* animation: hide-ani 1s forward; */
+}
+
+@keyframes show-ani {
+    from {opacity: 0;}
+
+    25% {opacity: 1;}
+
+    75% {opacity: 1;}
+
+    to {opacity: 0;}
+}
+
+.level-1 {
+    z-index: 1;
+}
+
+.level-2 {
+    z-index: 2;
+}
+
+/* ------------------- */
+
+.block-pleer {
+    /* background-color: blue; */
+    left: 0;
+    top: 80%;
+    position: fixed;
+    width: 100%;
+    /* height: 33%; */
+    overflow:auto;
+    height: 20%;
+}
+
+.now-track {
+    font-size: large;
+    color: white;
+    overflow: hidden;
+    position: fixed;
+    top: 80%;
+    height: 5%;
+}
+
+.pleer-header {
+    font-family: sans-serif;
+    font-size: medium;
+    font-weight: 500;
+
+    margin: 0;
+    position: absolute;
+    top: 0%;
+    left: 5%;
+    /* text-align: center; */
+}
+
+.simple-button {
+    color: burlywood;
+}
+
+.simple-button-clicked {
+    color:rgb(140, 107, 63);
+}
+
+/* .simple-button:hover {
+    color:rgb(140, 107, 63);
+} */
+
+.pleer-header > a {
+    cursor: pointer;
+}
+
+.pleer-header > * {
+    cursor: default;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none;   /* Chrome/Safari/Opera */
+    -khtml-user-select: none;    /* Konqueror */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* Internet Explorer/Edge */
+    user-select: none;           /* Non-prefixed version, currently
+                                    not supported by any browser */
+}
+
+.album-image-container {
+    top: 83%;
+    /* overflow: auto; */
+    position:fixed;
+}
+
+.track-name-container {
+    top: 80%;
+    left: 30%;
+    position: fixed;
+}
+
+.show-pleer-buttons-container {
+    top: 88%;
+    left: 30%;
+    position: fixed;
+}
+
+.hide-pleer-buttons-container {
+    top: 110%;
+    left: 30%;
+    position: fixed;
+}
+
+.pages-buttons-container {
+    top: 88%;
+    left: 86%;
+    position: fixed;
+}
+
+.album-image {
+    width: 80px;
+    /* width: 200px; */
+    border-radius: 10px;
+    /* position:relative; */
+    /* top: 0; */
+
+}
+
+.play-button {
+    color: greenyellow;
+}
+
+/* .play-button:hover {
+    color: green;
+} */
+
+.pause-button {
+    color: rgb(255, 49, 49);
+}
+
+/* .pause-button:hover {
+    color: rgb(125, 0, 0);
+} */
+
+.time-score {
+    color: rgb(181, 164, 255);
+}
+
+.volume {
+    color: blueviolet;
+}
+
+.copied-text {
+    color: blueviolet;
+}
+
+/* ------------------- */
+
+.block-music {
+    margin: 0;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 100%;
+    height: 80%;
+    background-color: black;
+}
+
+.albums-head {
+    font-size: x-large;
+    color: rgb(255, 255, 255);
+    cursor: default;
+    /* position: fixed; */
+    /* left: 5%; */
+}
+/* 35 */
+.albums {
+    margin: 0;
+    scrollbar-width:none;
+    position: fixed;
+    top: 10%;
+    left: 5%;
+    width: 90%;
+    height: 70%;
+    overflow: hidden;
+    overflow-y: scroll;
+}
+
+.tracks > * {
+    cursor: default;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none;   /* Chrome/Safari/Opera */
+    -khtml-user-select: none;    /* Konqueror */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* Internet Explorer/Edge */
+    user-select: none;           /* Non-prefixed version, currently
+                                    not supported by any browser */
+}
+
+.tracks > a {
+    cursor: pointer;
+    /* display: inline; */
+}
+
+.track {
+    /* display: inline-block; */
+    color: white;
+    /* animation: hide_ani 0.5s forwards; */
+    /* transition: left 2s linear; */
+}
+
+.track.show {
+    opacity: 0;
+    animation: show_ani 1s forwards;
+}
+
+.album.show {
+    opacity: 0;
+    animation: show_ani 1s forwards;
+}
+
+@keyframes show_ani {
+    0% {opacity: 0;}
+    100% {opacity: 1;}
+}
+
+.track.hide {
+    opacity: 1;
+    animation: hide_ani 1s forwards;
+}
+
+@keyframes hide_ani {
+    0% {opacity: 1;}
+    100% {opacity: 0;}
+}
+
+/* .track:hover {
+    color: rgb(95, 94, 94);
+} */
+.track_clicked {
+    color: rgb(95, 94, 94);
+}
+
+.albums > * {
+    cursor: default;
+    -webkit-touch-callout: none; /* iOS Safari */
+    -webkit-user-select: none;   /* Chrome/Safari/Opera */
+    -khtml-user-select: none;    /* Konqueror */
+    -moz-user-select: none;      /* Firefox */
+    -ms-user-select: none;       /* Internet Explorer/Edge */
+    user-select: none;           /* Non-prefixed version, currently
+                                    not supported by any browser */
+}
+
+.albums > a {
+    cursor: pointer;
+}
+
+.album {
+    color: white;
+}
+
+/* .album:hover {
+    color: rgb(95, 94, 94);
+} */
+
+.album-container {
+    display: flex;
+    align-items: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    border-top: 1px solid;
+    border-color: gray;
+
+}
+
+.album-head-container {
+    margin: 0;
+    position: fixed;
+    top: 0%;
+    left: 5%;
+    width: 90%;
+    height: 8%;
+    overflow: hidden;
+    z-index: 1;
+    /* width: 100% */
+}
+
+.album-track-image-container-without-border {
+    display: flex;
+    align-items: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    padding-top: 2%;
+}
+
+.album-track-image-container {
+    display: flex;
+    align-items: center;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    border-top: 1px solid;
+    border-color: gray;
+    padding-top: 2%;
+}
+
+.small-track-image {
+    width: 10%;
+    height: 10%;
+    border-radius: 10%;
+    margin-right: 1%;
+}

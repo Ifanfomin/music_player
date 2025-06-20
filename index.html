@@ -1,0 +1,77 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title id="site_title">Ifanfomin</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="search-style.css">
+    <link id="site_icon" rel="icon" href="" sizes="192x192" type="image/png">
+</head>
+<body>
+    <div class="block-pleer">
+        <header class="pleer-header" id="pleer-header">
+            <audio id='audio' onended="next_track()">
+                <source src="" type="audio/mpeg" id="pleer">
+                Your browser does not support the <code>audio</code> element.
+            </audio>
+
+            <div class="album-image-container">
+                <img class="album-image" id="album_image_1" src="null_track.png" alt="">
+                <!-- <img class="album-image" id="album_image_2" src="null_track.png" alt=""> -->
+            </div>
+            <div class="track-name-container">
+                <h1 id="track-name" class="text now-track">Track</h1>
+            </div>
+
+            <div id="first_pleer_buttons_container" class="show-pleer-buttons-container">
+                <a id="play_pause" class="text play-button">[play]</a>
+                <a id="prev" class="text simple-button">[prev]</a>
+                <a id="next" class="text simple-button">[next]</a>
+                <br>
+                <a id="score_down" class="text simple-button">[-10]</a>
+                <a id="score_up" class="text simple-button">[+10]</a>
+                <span id="score_time" class="text time-score unselectable">[00:00]</span>
+            </div>
+
+            <div id="second_pleer_buttons_container" class="hide-pleer-buttons-container">
+                <!-- <a id="volume_down" class="text simple-button">[-vol]</a>
+                <a id="volume_up" class="text simple-button">[+vol]</a>
+                <a id="volume_text" class="text volume">[100]</a> -->
+                <a id="timer_down" class="text simple-button">[-min]</a>
+                <a id="timer_up" class="text simple-button">[+min]</a>
+                <span id="timer_time" class="text time-score unselectable">[00:00]</span>
+                <br>
+                <a id="posled" class="text simple-button setted">[posled]</a>
+                <a id="random" class="text simple-button">[random]</a>
+                <a id="start_stop_timer" class="text simple-button">[ ]</a>
+            </div>
+            
+            <div class="pages-buttons-container">
+                <a id="first_page" class="text simple-button">[1]</a>
+                <br>
+                <a id="second_page" class="text simple-button">[2]</a>
+            </div>
+        </header>
+    </div>
+    <div id="block_music" class="block-music level-2">
+        <div class="album-head-container" onclick="" id="album_head_container">
+            <h1 class="text albums-head" id="albums_head">Albums</h1>
+        </div>
+        <header class="albums" id="albums">
+        </header>
+    </div>
+    <h1 id="search_button" class="text search-button unselectable">(🔎)</h1>
+    <div id="block_search" class="block-search level-1">
+        <div class="input-div text">
+            <input id="input_raw" class="text" type="text" placeholder="Search music">
+        </div>
+        <div id="founded_albums" class="founded-albums"></div>
+    </div>
+
+    <script src="files.js"></script>
+    <script src="music.js"></script>
+    <script src="pleer.js"></script>
+    <script src="search.js"></script>
+</body>
+</html>
