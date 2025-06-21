@@ -1,3 +1,6 @@
+# my ignore
+music_player_android/
+
 # Byte-compiled / optimized / DLL files
 __pycache__/
 *.py[cod]
