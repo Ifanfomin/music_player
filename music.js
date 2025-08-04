@@ -311,6 +311,9 @@ function show_folders_and_tracks(user_folder) {
         div.appendChild(a);
 
         albums_header.appendChild(div);
-
+        
+        if (track_index > 300) {
+            break;
+        }
     }
 }
