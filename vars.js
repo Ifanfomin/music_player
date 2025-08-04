@@ -3,7 +3,6 @@ var music_directory = "audio/";
 var images_directory = "img/";
 var album_name = "";
 var user_pos = ["Base"];
-console.log(`Позиция ${user_pos}`);
 var user_folder = {};
 var folders = [];
 var tracks = [];

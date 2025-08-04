@@ -39,7 +39,6 @@ function next_track() {
     }
 
     if (type_of_play == "random") {
-        console.log(`tracks.length ${tracks.length}, played.length ${played.length}`)
         if (tracks.length > played.length) {
             min = 0;
             max = tracks.length;
@@ -133,9 +132,6 @@ function set_track(track_index, start_play, by_user) {
     // }
     album_image_1.setAttribute("src", image_path);
     site_icon.setAttribute("href", image_path);
-
-    console.log(image_url);
-    console.log(track_name);
 
     audio.load();
     if (start_play) {
@@ -287,7 +283,6 @@ function show_folders_and_tracks(user_folder) {
 
         var img = document.createElement("img");
         img.setAttribute("class", "small-track-image");
-        console.log(track_info);
         if (!Array.isArray(track_info)) {
             image_url = images_directory + user_pos.slice(1).join("/") + "/" + track_info.slice(0, track_info.lastIndexOf(".")) + ".png";
         } else {

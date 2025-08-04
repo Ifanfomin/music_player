@@ -192,7 +192,6 @@ start_stop_timer_button.addEventListener("click", start_stop_checker);
 
 
 function timer_time_update() {
-    console.log(timer_score);
     if (timer_score > 0) {
         time = Math.floor(timer_score);
         var hours = Math.floor(time / 3600);

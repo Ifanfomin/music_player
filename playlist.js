@@ -51,7 +51,6 @@ function rec_add_folders(dict, path, folder) {
         if (name == "_tracks") {
             add_tracks(dict[name], path, folder);
         } else if (Object.keys(dict).length > 1) {
-            console.log(name);
             rec_add_folders(dict[name], path + "/" + name, folder);
         }
     }
