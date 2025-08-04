@@ -1,21 +1,4 @@
 // Основная работа
-// var music_directory = "/media/ifan/64_IFAN_SB/";
-var music_directory = "audio/";
-var images_directory = "img/";
-var album_name = "";
-// var
-var user_pos = ["Base"];
-console.log(`Позиция ${user_pos}`);
-var user_folder = {};
-var folders = [];
-var tracks = [];
-var now_play = [];
-var played = [];
-var type_of_play = "posled";
-var album_image_1 = document.getElementById("album_image_1");
-var album_image_2 = document.getElementById("album_image_2");
-var site_title = document.getElementById("site_title");
-var site_icon = document.getElementById("site_icon");
 
 set_path("Base");
 
@@ -46,14 +29,14 @@ function set_path(path_str) {
 
 function next_track() {
     if (type_of_play == "posled") {
-        if (tracks[tracks.indexOf(now_play.slice(-1)[0]) + 1]) {
-            var track = tracks[tracks.indexOf(now_play.slice(-1)[0]) + 1];
-            set_track(track, true, false);
+        if (now_play + 1 != tracks.length) {
+            now_play += 1;
+            set_track(now_play, true, false);
         } else {
-            var track = tracks[0];
-            set_track(track, false, false);
+            set_track(0, false, false);
         }
     }
+
     if (type_of_play == "random") {
         console.log(`tracks.length ${tracks.length}, played.length ${played.length}`)
         if (tracks.length > played.length) {
@@ -68,8 +51,8 @@ function next_track() {
                 }
             }
             played.push(random_int);
-            var track = tracks[random_int];
-            set_track(track, true, false);
+            var track_index = random_int;
+            set_track(track_index, true, false);
         }
     }
 }
@@ -77,29 +60,57 @@ function next_track() {
 
 function prev_track() {
     if (type_of_play == "posled") {
-        if (tracks.indexOf(now_play.slice(-1)[0]) - 1 > -1) {
-            var track = tracks[tracks.indexOf(now_play.slice(-1)[0]) - 1];
-            set_track(track, true, false);
+        if (now_play - 1 > -1) {
+            now_play -= 1;
+            set_track(now_play, true, false);
         }
     }
     if (type_of_play == "random") {
-        played.pop();
-        set_track(played[-1], true, false);
+        if (played.length > 1) {
+            played.pop();
+            set_track(played.slice(-1)[0], true, false);
+        } else {
+            set_track(played[0], true, false);
+        }
     }
 }
 
+/////// Трек ///////
+// Либо: 
+// .mp3 файл
+// 
+// Либо:
+// Список:
+//    название
+//    путь
+// 
 
-function set_track(track_name, start_play, by_user) {
+function set_track(track_index, start_play, by_user) {
     if (by_user == true) {
         set_play_button();
-        tracks = user_folder._tracks.slice(0);
-        now_play = user_pos.slice(0);
-        now_play.push(track_name);
-        played = [tracks.indexOf(track_name)];
+        // tracks = user_folder._tracks.slice(0);
+        tracks = [];
+        for (var track of user_folder._tracks) {
+            if (Array.isArray(track)) {
+                tracks.push(track[1].slice(1).join("/") + "/" + track[0]);
+            } else {
+                tracks.push(user_pos.slice(1).join("/") + "/" + track);
+            }
+        }
+
+        now_play = track_index;
+        played = [track_index];
     } else {
-        now_play.pop();
-        now_play.push(track_name);
+        now_play = track_index;
     }
+
+    track_path = tracks[track_index];
+
+    track_name = track_path.split("/").slice(-1)[0];
+
+    image_path = images_directory + 
+                 track_path.slice(0, track_path.lastIndexOf(".")) +
+                 ".png";
 
     var h1 = document.getElementById("track-name");
     h1.setAttribute("class", "text now-track show");
@@ -112,19 +123,18 @@ function set_track(track_name, start_play, by_user) {
     var audio = document.getElementById("audio");
     var pleer = document.getElementById("pleer");
 
-    track_name = music_directory + now_play.slice(1).join("/");
-    if (track_name.indexOf("#") != -1) {
-        track_name = track_name.slice(0, track_name.indexOf("#")) + "%23" + track_name.slice(track_name.indexOf("#") + 1);
-    }
-    pleer.setAttribute("src", track_name);
+    pleer.setAttribute("src", music_directory + track_path);
 
     // Ставим картинку
-    image_url = images_directory + now_play.slice(1).join("/").slice(0, now_play.slice(1).join("/").lastIndexOf(".")) + ".png";
-    if (image_url.indexOf("#") != -1) {
-        image_url = image_url.slice(0, image_url.indexOf("#")) + "%23" + image_url.slice(image_url.indexOf("#") + 1);
-    }
-    album_image_1.setAttribute("src", image_url);
-    site_icon.setAttribute("href", image_url);
+    // image_url = images_directory + now_play.slice(1).join("/").slice(0, now_play.slice(1).join("/").lastIndexOf(".")) + ".png";
+    // if (image_url.indexOf("#") != -1) {
+    //     image_url = image_url.slice(0, image_url.indexOf("#")) + "%23" + image_url.slice(image_url.indexOf("#") + 1);
+    // }
+    album_image_1.setAttribute("src", image_path);
+    site_icon.setAttribute("href", image_path);
+
+    console.log(image_url);
+    console.log(track_name);
 
     audio.load();
     if (start_play) {
@@ -134,6 +144,15 @@ function set_track(track_name, start_play, by_user) {
 
 
 function set_folder(folder, show) {
+    if (!playlist_button_pressed) {
+        classic_set_folder(folder, show);
+    } else {
+        playlist_set_folder(folder, show);
+    }
+
+}
+
+function classic_set_folder(folder, show) {
     // var tracks_header = document.getElementById("tracks");
     // var tracks_a = document.querySelectorAll(".track");
     // for (track of tracks_a) {
@@ -177,12 +196,13 @@ function set_folder(folder, show) {
     }
 }
 
+
 function show_folders_and_tracks(user_folder) {
     // album_image_2.setAttribute("src", music_directory + user_pos.slice(1).join("/") + "/cover.jpg");
     
 
 
-    folders = Object.keys(user_folder).slice(0, -1);
+    folders = Object.keys(user_folder);
     // Собираем плашку с папками над плеером
     var albums_head = document.getElementById("albums_head");
     albums_head.innerHTML = "< " + user_pos[user_pos.length - 1].slice(0, 25);
@@ -206,7 +226,12 @@ function show_folders_and_tracks(user_folder) {
         } else {
             div.setAttribute("class", "album-track-image-container");
         }
-        div.setAttribute("onclick", "set_folder(`" + folder + "`, true)");
+
+        if (!playlist_button_pressed) {
+            div.setAttribute("onclick", "set_folder(`" + folder + "`, true)");
+        } else {
+            div.setAttribute("onclick", "playlist_set_folder(`" + folder + "`)");
+        }
 
         var a = document.createElement("a");
         var a_text = document.createTextNode("{" + folder + "}");
@@ -218,27 +243,29 @@ function show_folders_and_tracks(user_folder) {
     }
 
     for (var folder of folders) {
-        elements_counter = elements_counter + 1;
+        if (folder != "_tracks") {
+            elements_counter = elements_counter + 1;
 
-        var div = document.createElement("div");
-        if (elements_counter == 1) {
-            div.setAttribute("class", "album-track-image-container-without-border");
-        } else {
-            div.setAttribute("class", "album-track-image-container");
+            var div = document.createElement("div");
+            if (elements_counter == 1) {
+                div.setAttribute("class", "album-track-image-container-without-border");
+            } else {
+                div.setAttribute("class", "album-track-image-container");
+            }
+            div.setAttribute("onclick", "set_folder(`" + folder + "`, true)");
+
+            var a = document.createElement("a");
+            var a_text = document.createTextNode("(" + folder + ")");
+            a.appendChild(a_text);
+            a.setAttribute("onclick", "set_folder(`" + folder + "`, true)");
+            a.setAttribute("class", "text track show");
+            
+            div.appendChild(a);
+            albums_header.appendChild(div);
         }
-        div.setAttribute("onclick", "set_folder(`" + folder + "`, true)");
-
-        var a = document.createElement("a");
-        var a_text = document.createTextNode("(" + folder + ")");
-        a.appendChild(a_text);
-        a.setAttribute("onclick", "set_folder(`" + folder + "`, true)");
-        a.setAttribute("class", "text track show");
-        
-        div.appendChild(a);
-        albums_header.appendChild(div);
     }
 
-    for (var track_name of user_folder._tracks) {
+    for ( var track_index = 0; track_index < user_folder._tracks.length; track_index++ ) {
         elements_counter = elements_counter + 1;
 
         var div = document.createElement("div");
@@ -247,19 +274,37 @@ function show_folders_and_tracks(user_folder) {
         } else {
             div.setAttribute("class", "album-track-image-container");
         }
-        div.setAttribute("onclick", "set_track(`" + track_name + "`, true, true)");
+
+        track_info = user_folder._tracks[track_index];
+
+        if (playlist_button_pressed) {
+            div.setAttribute("onclick", "add_to_playlist(" + track_index + ")");
+        } else {
+            div.setAttribute("onclick", "set_track(" + track_index + ", true, true)");
+        }
+        
 
         var img = document.createElement("img");
         img.setAttribute("class", "small-track-image");
-        image_url = images_directory + user_pos.slice(1).join("/") + "/" + track_name.slice(0, track_name.lastIndexOf(".")) + ".png";
+        console.log(track_info);
+        if (!Array.isArray(track_info)) {
+            image_url = images_directory + user_pos.slice(1).join("/") + "/" + track_info.slice(0, track_info.lastIndexOf(".")) + ".png";
+        } else {
+            image_url = images_directory + track_info[1].slice(1).join("/") + "/" + track_info[0].slice(0, track_info[0].lastIndexOf(".")) + ".png";
+        }
         if (image_url.indexOf("#") != -1) {
             image_url = image_url.slice(0, image_url.indexOf("#")) + "%23" + image_url.slice(image_url.indexOf("#") + 1);
         }
+        
         img.setAttribute("src", image_url);
         div.appendChild(img);
         
         var a = document.createElement("a");
-        var a_text = document.createTextNode("[" + track_name.slice(0, -4).slice(0, 30) + "]");
+        if (!Array.isArray(track_info)) {
+            var a_text = document.createTextNode("[" + track_info.slice(0, -4).slice(0, 30) + "]");
+        } else {
+            var a_text = document.createTextNode("[" + track_info[0].slice(0, -4).slice(0, 30) + "]");
+        }
         a.appendChild(a_text);
 
         a.setAttribute("class", "text track show");

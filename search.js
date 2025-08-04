@@ -1,15 +1,3 @@
-var search_button = document.getElementById("search_button");
-var now_search_music_block = "music";
-var input_raw = document.getElementById("input_raw")
-
-var block_search= document.getElementById("block_search");
-var block_music = document.getElementById("block_music");
-var fouded_albums = document.getElementById("founded_albums");
-
-var query = "";
-var childs_count = 0;
-var max_childs_count = 100;
-
 
 function set_search_music_block() {
     if (now_search_music_block == "music") {
@@ -103,7 +91,7 @@ function rec_search_files(dict, path, query) {
                     childs_count += 1;
                     add_founded_child("album", path, name);
                 }
-                rec_search_files(dict[name], path + "/" + name, query)
+                rec_search_files(dict[name], path + "/" + name, query);
             }
         }
     }
