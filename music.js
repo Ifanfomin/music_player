@@ -15,6 +15,7 @@ set_path("Base");
 // }
 
 function set_path(path_str) {
+    set_folder("Base");
     path = path_str.split("/");
     for (var f_index = 0; f_index < path.length; f_index++) {
         var folder = path[f_index];

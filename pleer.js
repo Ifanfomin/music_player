@@ -238,6 +238,13 @@ posled_button.addEventListener("click", set_posled_play);
 random_button.addEventListener("click", set_random_play);
 
 
+function go_to_track() {
+    set_path(tracks[now_play]);
+}
+
+image_button.addEventListener("click", go_to_track);
+
+
 // function copy(str){
 //     var tmp = document.createElement('INPUT');
 //     var focus = document.activeElement;

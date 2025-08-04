@@ -62,6 +62,8 @@ var score_time = "[00:00]";
 var posled_button = document.getElementById("posled");
 var random_button = document.getElementById("random");
 
+var image_button = document.getElementById("album_image_1");
+
 // var copy_song = document.getElementById("copy_song");
 // var copied = document.getElementById("copied");
 
