@@ -9,15 +9,17 @@ function select_tracks() {
         playlist_button_pressed = true;
         playlist_button.innerHTML = "[*]";
         show_folders_and_tracks(user_folder);
+        start_search();
     } else {
         playlist_button_pressed = false;
         playlist_button.innerHTML = "[ ]";
         show_folders_and_tracks(user_folder);
+        start_search();
     }
 }
 playlist_button.addEventListener("click", select_tracks);
 
-function add_to_playlist(track_index) {
+function add_to_playlist_user(track_index) {
     // добавляем трек в playlist
     // если трек уже есть в playlist, то удаляем
     if (Array.isArray(user_folder._tracks[track_index])) {
@@ -31,6 +33,16 @@ function add_to_playlist(track_index) {
     } else {
         files.Base.playlist._tracks.push(track_info);
     }
+}
+
+function add_to_playlist_search(track_name, track_path) {
+    // добавляем трек в playlist
+    // если трек уже есть в playlist, то удаляем
+    // в поиске не появляются ссылки на треки
+
+    track_info = [track_name, track_path.split("/").slice(1)];
+
+    files.Base.playlist._tracks.push(track_info);
 }
 
 

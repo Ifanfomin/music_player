@@ -275,7 +275,7 @@ function show_folders_and_tracks(user_folder) {
         track_info = user_folder._tracks[track_index];
 
         if (playlist_button_pressed) {
-            div.setAttribute("onclick", "add_to_playlist(" + track_index + ")");
+            div.setAttribute("onclick", "add_to_playlist_user(" + track_index + ")");
         } else {
             div.setAttribute("onclick", "set_track(" + track_index + ", true, true)");
         }
