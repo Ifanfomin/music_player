@@ -46,9 +46,10 @@ function add_to_playlist_search(track_name, track_path) {
 }
 
 
-function add_tracks(tracks, path, folder) {
+function add_tracks(tracks, path, folder, prev_path) {
     for (var track of tracks) {
-        info_path = (user_pos.join("/") + "/" +  folder + path).split("/");
+        console.log("path:" + path);
+        info_path = (prev_path + "/" +  folder + path).split("/");
         
         track_info = [
             track,
@@ -58,12 +59,12 @@ function add_tracks(tracks, path, folder) {
     }
 }
 
-function rec_add_folders(dict, path, folder) {
+function rec_add_folders(dict, path, folder, prev_path) {
     for (var name of Object.keys(dict)) {
         if (name == "_tracks") {
-            add_tracks(dict[name], path, folder);
+            add_tracks(dict[name], path, folder, prev_path);
         } else if (Object.keys(dict).length > 1) {
-            rec_add_folders(dict[name], path + "/" + name, folder);
+            rec_add_folders(dict[name], path + "/" + name, folder, prev_path);
         }
     }
 }
@@ -78,7 +79,7 @@ function playlist_set_user_folder(folder) {
     if (folder == "playlist") {
         clear_playlist();
     } else {
-        rec_add_folders(user_folder[folder], path, folder);
+        rec_add_folders(user_folder[folder], path, folder, user_pos.join("/"));
     }
 }
 
@@ -101,7 +102,7 @@ function playlist_set_search_folder(folder_path) {
     if (folder == "playlist") {
         clear_playlist();
     } else {
-        rec_add_folders(search_folder, path, folder_path[folder_path.length - 1]);
+        rec_add_folders(search_folder, path, folder_path[folder_path.length - 1], folder_path);
     }
 }
 
