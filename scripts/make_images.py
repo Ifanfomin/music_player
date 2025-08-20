@@ -48,15 +48,16 @@ def f(dct: dict, name: str, path: str, number: int):
                         file = music_tag.load_file(path + name)
                         # print(file)
                         data = file["artwork"].first
-                        if data != None:
-                            with open(img_path + name[:name.rfind(".")] + ".png", "wb") as img:
-                                # print(file["artwork"].first.data)
-                                # print(path + name[:name.rfind(".")] + ".png")
+
+                        with open(img_path + name[:name.rfind(".")] + ".png", "wb") as img:
+                            if data != None:
                                 img.write(data.data)
-                        elif cover != False:
-                            with open(img_path + name[:name.rfind(".")] + ".png", "wb") as img:
+                            elif cover != False:
                                 with open(path + cover, "rb") as cov:
                                     img.write(cov.read())
+                            else:
+                                with open("null_track.png", "rb") as null_track:
+                                    img.write(null_track.read())
                 except:
                     ...
 
