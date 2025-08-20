@@ -59,7 +59,11 @@ function add_founded_child(track_album, album_path, child_name, track_index) {
         a.setAttribute("class", "text track show");
         div.appendChild(a);
     } else if (track_album == "album") {
-        div.setAttribute("onclick", "set_path_and_folder(`" + album_path + "`, `" + child_name + "`)");
+        if (playlist_button_pressed) {
+            div.setAttribute("onclick", "playlist_set_search_folder(`" + album_path + "/" + child_name + "`)");
+        } else {
+            div.setAttribute("onclick", "set_path_and_folder(`" + album_path + "`, `" + child_name + "`)");
+        }
         
         var a = document.createElement("a");
         var a_text = document.createTextNode("(" + child_name + ")");

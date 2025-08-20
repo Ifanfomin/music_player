@@ -144,7 +144,7 @@ function set_folder(folder, show) {
     if (!playlist_button_pressed) {
         classic_set_folder(folder, show);
     } else {
-        playlist_set_folder(folder, show);
+        playlist_set_user_folder(folder, show);
     }
 
 }

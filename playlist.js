@@ -68,7 +68,7 @@ function rec_add_folders(dict, path, folder) {
     }
 }
 
-function playlist_set_folder(folder) {
+function playlist_set_user_folder(folder) {
     // тут надо добавлять целые папки в плейлист
     // чтобы играли по порядку/случайно треки папки
     // думаю можно просто добавить рекурсивно треки папки в playlist._tracks
@@ -81,6 +81,30 @@ function playlist_set_folder(folder) {
         rec_add_folders(user_folder[folder], path, folder);
     }
 }
+
+function playlist_set_search_folder(folder_path) {
+    // тут надо добавлять целые папки в плейлист
+    // чтобы играли по порядку/случайно треки папки
+    // думаю можно просто добавить рекурсивно треки папки в playlist._tracks
+    // при удалении папки тоже рекурсивно посмотреть совпадения и удалить
+
+    var search_folder = files;
+    folder_path = folder_path.split("/").slice(1);
+    console.log(folder_path);
+    for (var folder of folder_path) {
+        console.log(folder);
+        search_folder = search_folder[folder];
+        console.log(search_folder);
+    }
+
+    path = "";
+    if (folder == "playlist") {
+        clear_playlist();
+    } else {
+        rec_add_folders(search_folder, path, folder_path[folder_path.length - 1]);
+    }
+}
+
 
 function clear_playlist() {
     files.Base.playlist._tracks = [];
