@@ -102,7 +102,7 @@ function playlist_set_search_folder(folder_path) {
     if (folder == "playlist") {
         clear_playlist();
     } else {
-        rec_add_folders(search_folder, path, folder_path[folder_path.length - 1], folder_path);
+        rec_add_folders(search_folder, path, folder_path[folder_path.length - 1], folder_path.slice(0, -1).join("/"));
     }
 }
 
