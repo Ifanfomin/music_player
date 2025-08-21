@@ -48,7 +48,6 @@ function add_to_playlist_search(track_name, track_path) {
 
 function add_tracks(tracks, path, folder, prev_path) {
     for (var track of tracks) {
-        console.log("path:" + path);
         info_path = (prev_path + "/" +  folder + path).split("/");
         
         track_info = [
@@ -91,11 +90,8 @@ function playlist_set_search_folder(folder_path) {
 
     var search_folder = files;
     folder_path = folder_path.split("/").slice(1);
-    console.log(folder_path);
     for (var folder of folder_path) {
-        console.log(folder);
         search_folder = search_folder[folder];
-        console.log(search_folder);
     }
 
     path = "";

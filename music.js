@@ -240,6 +240,7 @@ function show_folders_and_tracks(user_folder) {
     }
 
     for (var folder of folders) {
+        console.log(folder);
         if (folder != "_tracks") {
             elements_counter = elements_counter + 1;
 
