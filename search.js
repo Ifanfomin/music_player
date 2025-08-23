@@ -1,15 +1,3 @@
-var search_button = document.getElementById("search_button");
-var now_search_music_block = "music";
-var input_raw = document.getElementById("input_raw")
-
-var block_search= document.getElementById("block_search");
-var block_music = document.getElementById("block_music");
-var fouded_albums = document.getElementById("founded_albums");
-
-var query = "";
-var childs_count = 0;
-var max_childs_count = 100;
-
 
 function set_search_music_block() {
     if (now_search_music_block == "music") {
@@ -29,9 +17,9 @@ function set_search_music_block() {
 search_button.addEventListener("click", set_search_music_block);
 
 
-function set_path_and_track(path, track_name) {
+function set_path_and_track(path, track_index) {
     set_path(path);
-    set_track(track_name, true, true);
+    set_track(track_index, true, true);
 }
 
 function set_path_and_folder(path, folder_name) {
@@ -40,7 +28,7 @@ function set_path_and_folder(path, folder_name) {
     set_search_music_block();
 }
 
-function add_founded_child(track_album, album_path, child_name) {
+function add_founded_child(track_album, album_path, child_name, track_index) {
     var div = document.createElement("div");
     if (childs_count == 1) {
         div.setAttribute("class", "album-track-image-container-without-border");
@@ -49,7 +37,11 @@ function add_founded_child(track_album, album_path, child_name) {
     }
 
     if (track_album == "track") {
-        div.setAttribute("onclick", "set_path_and_track(`" + album_path + "`, `" + child_name + "`)");
+        if (playlist_button_pressed) {
+            div.setAttribute("onclick", "add_to_playlist_search(`" + child_name + "`, `" + album_path + "`)");
+        } else {
+            div.setAttribute("onclick", "set_path_and_track(`" + album_path + "`, " + track_index + ")");            
+        }
 
         var img = document.createElement("img");
         img.setAttribute("class", "small-track-image");
@@ -67,7 +59,11 @@ function add_founded_child(track_album, album_path, child_name) {
         a.setAttribute("class", "text track show");
         div.appendChild(a);
     } else if (track_album == "album") {
-        div.setAttribute("onclick", "set_path_and_folder(`" + album_path + "`, `" + child_name + "`)");
+        if (playlist_button_pressed) {
+            div.setAttribute("onclick", "playlist_set_search_folder(`" + album_path + "/" + child_name + "`)");
+        } else {
+            div.setAttribute("onclick", "set_path_and_folder(`" + album_path + "`, `" + child_name + "`)");
+        }
         
         var a = document.createElement("a");
         var a_text = document.createTextNode("(" + child_name + ")");
@@ -81,14 +77,18 @@ function add_founded_child(track_album, album_path, child_name) {
 }
 
 function indexOfInsensitive(str_1, str_2) {
-    return str_1.toLowerCase().split("_").join(" ").indexOf(str_2.toLowerCase().split("_").join(" ")) !== -1;
+    if (typeof str_1 === 'string') {
+        return str_1.toLowerCase().split("_").join(" ").indexOf(str_2.toLowerCase().split("_").join(" ")) !== -1;
+    } else {
+        return false;
+    }
 }
 
 function search_in_tracks(tracks, path, query) {
-    for (var track of tracks) {
-        if (indexOfInsensitive(track, query)) {
+    for (var i = 0; i < tracks.length; i++) {
+        if (indexOfInsensitive(tracks[i], query)) {
             childs_count += 1;
-            add_founded_child("track", path, track);
+            add_founded_child("track", path, tracks[i], i);
         }
     }
 }
@@ -101,9 +101,9 @@ function rec_search_files(dict, path, query) {
             } else {
                 if (indexOfInsensitive(name, query)) {
                     childs_count += 1;
-                    add_founded_child("album", path, name);
+                    add_founded_child("album", path, name, -1);
                 }
-                rec_search_files(dict[name], path + "/" + name, query)
+                rec_search_files(dict[name], path + "/" + name, query);
             }
         }
     }
