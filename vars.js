@@ -85,3 +85,16 @@ var max_childs_count = 100;
 var playlist_button = document.getElementById("playlist_button");
 var playlist_button_pressed = false;
 var track_info = [];
+
+
+/// files.js ///
+var files_update_button = document.getElementById("files_update_button");
+var cloud_api_resources = "https://cloud-api.yandex.net/v1/disk/public/resources";
+var cloud_api_download = "https://cloud-api.yandex.net/v1/disk/public/resources/download";
+var cloud_api_public_key = "?public_key=";
+var cloud_api_disk_url = "https://disk.yandex.ru/d/Ow6aYwA6M4RjEQ";
+var cloud_api_path = "&path=";
+var cloud_api_disk_path = "";
+var cloud_api_request = "";
+var response_json = {};
+var files = {};

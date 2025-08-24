@@ -1,6 +1,16 @@
 // Основная работа
 
-set_path("Base");
+
+// загрузка из localStorage
+try {
+    files = JSON.parse(localStorage.getItem("files"));
+    console.log
+    set_folder("Base");
+} catch (err) {
+    console.log(err);
+    update_files();
+}
+
 
 // Принимаем Query String
 // Пример запроса: ?path=/Русское/Аквариум/1983 - Радио Африка&track=музыка серебряных спиц
@@ -85,7 +95,7 @@ function prev_track() {
 //    путь
 // 
 
-function set_track(track_index, start_play, by_user) {
+async function set_track(track_index, start_play, by_user) {
     if (by_user == true) {
         set_play_button();
         // tracks = user_folder._tracks.slice(0);
@@ -123,7 +133,17 @@ function set_track(track_index, start_play, by_user) {
     var audio = document.getElementById("audio");
     var pleer = document.getElementById("pleer");
 
-    pleer.setAttribute("src", music_directory + track_path);
+    var track_url = cloud_api_download +
+                    cloud_api_public_key +
+                    cloud_api_disk_url +
+                    cloud_api_path + "/" +
+                    track_path;
+    
+    track_url = (await fetch(track_url).then(x => x.json())).href
+
+    console.log(track_url);
+
+    pleer.setAttribute("src", track_url);
 
     // Ставим картинку
     // image_url = images_directory + now_play.slice(1).join("/").slice(0, now_play.slice(1).join("/").lastIndexOf(".")) + ".png";
@@ -140,7 +160,7 @@ function set_track(track_index, start_play, by_user) {
 }
 
 
-function set_folder(folder, show) {
+async function set_folder(folder, show) {
     if (!playlist_button_pressed) {
         classic_set_folder(folder, show);
     } else {
@@ -292,6 +312,8 @@ function show_folders_and_tracks(user_folder) {
         if (image_url.indexOf("#") != -1) {
             image_url = image_url.slice(0, image_url.indexOf("#")) + "%23" + image_url.slice(image_url.indexOf("#") + 1);
         }
+        
+        
         
         img.setAttribute("src", image_url);
         div.appendChild(img);

@@ -1,7 +1,3 @@
-files.Base.playlist = {
-    "_tracks": []
-};
-
 // var local_playlist = {};
 
 function select_tracks() {
