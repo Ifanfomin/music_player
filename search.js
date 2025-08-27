@@ -7,14 +7,19 @@ function set_search_music_block() {
         block_search.setAttribute("class", "block-search level-2");
         block_music.setAttribute("class", "block-music level-1");
 
+        dots_button.setAttribute("class", "text dots-button unselectable level-2");
+
     } else if (now_search_music_block == "search") {
         now_search_music_block = "music";
         block_music.setAttribute("class", "block-music level-2");
         block_search.setAttribute("class", "block-search level-1");
+        
+        dots_button.setAttribute("class", "text dots-button unselectable level-3");
     }
 }
 
 search_button.addEventListener("click", set_search_music_block);
+search_button_second.addEventListener("click", set_search_music_block);
 
 
 function set_path_and_track(path, track_index) {
