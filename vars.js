@@ -69,6 +69,7 @@ var image_button = document.getElementById("album_image_1");
 
 /// search.js ///
 var search_button = document.getElementById("search_button");
+var search_button_second = document.getElementById("search_button_second");
 var now_search_music_block = "music";
 var input_raw = document.getElementById("input_raw")
 
@@ -92,9 +93,21 @@ var files_update_button = document.getElementById("files_update_button");
 var cloud_api_resources = "https://cloud-api.yandex.net/v1/disk/public/resources";
 var cloud_api_download = "https://cloud-api.yandex.net/v1/disk/public/resources/download";
 var cloud_api_public_key = "?public_key=";
-var cloud_api_disk_url = "https://disk.yandex.ru/d/Ow6aYwA6M4RjEQ";
+var cloud_api_disk_url = JSON.parse(localStorage.getItem("publik_key"));
 var cloud_api_path = "&path=";
 var cloud_api_disk_path = "";
 var cloud_api_request = "";
 var response_json = {};
 var files = {};
+
+var block_input_key = document.getElementById("block_input_key");
+var input_publik_key_raw = document.getElementById("input_publik_key_raw");
+var publik_key_button = document.getElementById("publik_key_button");
+var publik_key_button_second = document.getElementById("publik_key_button_second");
+var block_publik_key_shown = false;
+
+
+/// spec_buttons.js ///
+var dots_button = document.getElementById("dots_button");
+var block_spec_buttons = document.getElementById("block_spec_buttons");
+var block_spec_buttons_shown = false;
