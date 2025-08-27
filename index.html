@@ -6,8 +6,7 @@
     <title id="site_title">Ifanfomin</title>
     <link rel="stylesheet" href="style.css">
     <link rel="stylesheet" href="search-style.css">
-    <link rel="stylesheet" href="playlist-style.css">
-    <link rel="stylesheet" href="files-style.css">
+    <link rel="stylesheet" href="spec-buttons-style.css">
     <link id="site_icon" rel="icon" href="" sizes="192x192" type="image/png">
 </head>
 <body>
@@ -56,6 +55,7 @@
             </div>
         </header>
     </div>
+    
     <div id="block_music" class="block-music level-2">
         <div class="album-head-container" onclick="" id="album_head_container">
             <h1 class="text albums-head" id="albums_head">Albums</h1>
@@ -63,21 +63,38 @@
         <header class="albums" id="albums">
         </header>
     </div>
-    <h1 id="search_button" class="text search-button unselectable">(🔎)</h1>
-    <h1 id="playlist_button" class="text playlist-select-button unselectable">[ ]</h1>
-    <h1 id="files_update_button" class="text files-update-button unselectable">🔄</h1>
+
+    <h1 id="dots_button" class="text dots-button unselectable level-3">•••</h1>
+    <div id="block_spec_buttons" class="block-spec-buttons level-1">
+        <div id="publik_key_button" class="text publik-key-button unselectable">(🔑)</div>
+        <div id="files_update_button" class="text files-update-button unselectable">(🔄)</div>
+        <div id="playlist_button" class="text playlist-select-button unselectable">[ ]</div>
+        <div id="search_button" class="text search-button unselectable">(🔎)</div>
+    </div>
+
     <div id="block_search" class="block-search level-1">
+        
         <div class="input-div text">
             <input id="input_raw" class="text" type="text" placeholder="Search music">
+            <div id="search_button_second" class="text search-button unselectable">(🔎)</div>
         </div>
         <div id="founded_albums" class="founded-albums"></div>
     </div>
 
+    <div id="block_input_key" class="input-div level-1">
+        <input id="input_publik_key_raw" class="text" type="text" placeholder="Input Folder Url">
+        <div id="publik_key_button_second" class="text publik-key-button unselectable">(🔑)</div>
+    </div>
+
     <script src="vars.js"></script>
+    <script src="indexeddb.js"></script>
     <script src="files.js"></script>
     <script src="music.js"></script>
     <script src="pleer.js"></script>
     <script src="search.js"></script>
     <script src="playlist.js"></script>
+    <script src="spec_buttons.js"></script>
+    
+    <script src="https://cdn.jsdelivr.net/gh/aadsm/jsmediatags@refs/heads/master/dist/jsmediatags.min.js"></script>
 </body>
 </html>

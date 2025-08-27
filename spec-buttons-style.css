@@ -1,0 +1,59 @@
+.block-spec-buttons {
+    margin: 3.5%;
+    position: fixed;
+    top: 0%;
+    left: 0%;
+    width: 80%;
+    height: 5%;
+    background-color: black;
+    text-align: right;
+}
+
+.dots-button {
+    font-size: x-large;
+    color: rgb(255, 255, 255);
+    cursor: default;
+    position: fixed;
+    right: 5%;
+    background-color: black;
+}
+
+.search-button {
+    font-size: x-large;
+    color: rgb(255, 255, 255);
+    cursor: default;
+    background-color: black;
+    display: inline;
+    margin: 1%;
+    font-family: Fira Code;
+}
+
+.playlist-select-button {
+    font-size: x-large;
+    color: rgb(255, 255, 255);
+    cursor: default;
+    background-color: black;
+    display: inline;
+    margin: 1%;
+    font-family: Fira Code;
+}
+
+.files-update-button {
+    font-size: x-large;
+    color: rgb(255, 255, 255);
+    cursor: default;
+    background-color: black;
+    display: inline;
+    margin: 1%;
+    font-family: Fira Code;
+}
+
+.publik-key-button {
+    font-size: x-large;
+    color: rgb(255, 255, 255);
+    cursor: default;
+    background-color: black;
+    display: inline;
+    margin: 1%;
+    font-family: Fira Code;
+}
